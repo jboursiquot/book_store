@@ -1,19 +1,26 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Book -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => Book %></h1>
+</div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @book.title %>
-</p>
+<div class="fieldset">
+  <dl>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:title) %></dt>
+      <dd><pre class="prettyprint"><%= @book.title %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:author) %></dt>
+      <dd><pre class="prettyprint"><%= @book.author %></pre></dd>
+  </dl>
+</div>
 
-<p>
-  <strong>Author:</strong>
-  <%= @book.author %>
-</p>
+<div class="form-group">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              books_path, :class => 'btn btn-default'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_book_path(@book), :class => 'btn btn-default' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              book_path(@book),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>
 
-<p>
-  <strong>Checkout:</strong>
-  <%= @book.checkout %>
-</p>
-
-<%= link_to 'Edit', edit_book_path(@book) %> |
-<%= link_to 'Back', books_path %>
